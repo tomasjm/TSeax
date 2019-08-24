@@ -1,18 +1,24 @@
 import "reflect-metadata";
-import express, { Application } from "express";
+import express, { Application, RequestHandler } from "express";
 import cors from 'cors';
-import AppRouter from './router';
+import {AppRouter} from './router';
+// import "./test.controller";
 
-export default class TSeax {
+export class TSeax {
     private app: Application;
     private port: Number;
-    constructor(port: number) {
+    constructor(port: number, middlewares?: RequestHandler[]) {
         this.port = port;
         this.app = express();
-        this.middlewares();
+        this.middlewares(middlewares);
         this.startServer();
     }
-    private middlewares() {
+    private middlewares(middlewares?: RequestHandler[]) {
+        if (middlewares) {
+            for(let middleware of middlewares) {
+                this.app.use(middleware);
+            }
+        }
         this.app.use(cors());
         this.app.use(express.json());
         this.app.use(AppRouter.getRouter());

@@ -1,7 +1,7 @@
 import express, { Router } from "express";
 
 
-export default class AppRouter {
+export class AppRouter {
     private static Router: Router;
     static getRouter(): Router {
         if (!AppRouter.Router) {
