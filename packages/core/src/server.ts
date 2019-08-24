@@ -2,7 +2,6 @@ import "reflect-metadata";
 import express, { Application, RequestHandler } from "express";
 import cors from 'cors';
 import {AppRouter} from './router';
-
 export class TSeax {
     private app: Application;
     private port: Number;

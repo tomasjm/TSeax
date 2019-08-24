@@ -10,11 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var decorators_1 = require("./decorators");
+var http_responses_1 = require("./http_responses");
 var TestController = /** @class */ (function () {
     function TestController() {
     }
     TestController.prototype.Test = function () {
-        return "Your response!";
+        return new http_responses_1.HttpResponseOk(true, { message: "hola mundo" });
     };
     __decorate([
         decorators_1.Get("test"),
