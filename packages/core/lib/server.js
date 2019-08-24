@@ -8,13 +8,19 @@ var express_1 = __importDefault(require("express"));
 var cors_1 = __importDefault(require("cors"));
 var router_1 = require("./router");
 var TSeax = /** @class */ (function () {
-    function TSeax(port) {
+    function TSeax(port, middlewares) {
         this.port = port;
         this.app = express_1.default();
-        this.middlewares();
+        this.middlewares(middlewares);
         this.startServer();
     }
-    TSeax.prototype.middlewares = function () {
+    TSeax.prototype.middlewares = function (middlewares) {
+        if (middlewares) {
+            for (var _i = 0, middlewares_1 = middlewares; _i < middlewares_1.length; _i++) {
+                var middleware = middlewares_1[_i];
+                this.app.use(middleware);
+            }
+        }
         this.app.use(cors_1.default());
         this.app.use(express_1.default.json());
         this.app.use(router_1.AppRouter.getRouter());
